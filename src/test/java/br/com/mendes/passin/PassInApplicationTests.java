@@ -1,10 +1,10 @@
-package br.com.mendes.passin20;
+package br.com.mendes.passin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class PassInApplicationTests {
 
 	@Test
 	void contextLoads() {

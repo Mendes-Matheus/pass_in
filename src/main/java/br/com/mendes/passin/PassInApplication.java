@@ -1,13 +1,13 @@
-package br.com.mendes.passin20;
+package br.com.mendes.passin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class PassInApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(PassInApplication.class, args);
 	}
 
 }
