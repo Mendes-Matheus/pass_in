@@ -2,15 +2,20 @@ package br.com.mendes.passin.services;
 
 import br.com.mendes.passin.domain.attendee.Attendee;
 import br.com.mendes.passin.domain.event.Event;
+import br.com.mendes.passin.domain.event.exceptions.EventFullException;
 import br.com.mendes.passin.domain.event.exceptions.EventNotFoundException;
+import br.com.mendes.passin.dto.attendee.AttendeeIdDTO;
+import br.com.mendes.passin.dto.attendee.AttendeeRequestDTO;
 import br.com.mendes.passin.dto.event.EventIdDTO;
 import br.com.mendes.passin.dto.event.EventRequestDTO;
 import br.com.mendes.passin.dto.event.EventResponseDTO;
+import br.com.mendes.passin.repositories.AttendeeRepository;
 import br.com.mendes.passin.repositories.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -18,6 +23,7 @@ import java.util.List;
 public class EventService {
     private final EventRepository eventRepository;
     private final AttendeeService attendeeService;
+    private final AttendeeRepository attendeeRepository;
 
 
     private Event getEventById(String eventId){
@@ -53,4 +59,21 @@ public class EventService {
                 .toLowerCase();
     }
 
+    public AttendeeIdDTO registerAttendeeOnEvent(String eventId, AttendeeRequestDTO attendeeRequestDTO){
+        this.attendeeService.verifyAttendeeSubscription(eventId, attendeeRequestDTO.email());
+
+        Event event = this.getEventById(eventId);
+        List<Attendee> attendeeList = this.attendeeService.getAllAttendeesFromEvent(eventId);
+
+        if(event.getMaximumAttendees() <= attendeeList.size()) throw new EventFullException("Event is full");
+
+        Attendee newAttendee = new Attendee();
+        newAttendee.setName(attendeeRequestDTO.name());
+        newAttendee.setEmail(attendeeRequestDTO.email());
+        newAttendee.setEvent(event);
+        newAttendee.setCreatedAt(LocalDateTime.now());
+        this.attendeeService.registerAttendee(newAttendee);
+
+        return new AttendeeIdDTO(newAttendee.getId());
+    }
 }
