@@ -2,6 +2,7 @@ package br.com.mendes.passin.services;
 
 import br.com.mendes.passin.domain.attendee.Attendee;
 import br.com.mendes.passin.domain.event.Event;
+import br.com.mendes.passin.domain.event.exceptions.EventNotFoundException;
 import br.com.mendes.passin.dto.event.EventIdDTO;
 import br.com.mendes.passin.dto.event.EventRequestDTO;
 import br.com.mendes.passin.dto.event.EventResponseDTO;
@@ -21,7 +22,7 @@ public class EventService {
 
     private Event getEventById(String eventId){
         return this.eventRepository.findById(eventId).orElseThrow(()
-                -> new RuntimeException("Event not found with ID: " + eventId));
+                -> new EventNotFoundException("Event not found with ID: " + eventId));
     }
 
     public EventResponseDTO getEventDetail(String eventId){

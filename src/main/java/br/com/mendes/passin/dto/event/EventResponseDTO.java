@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @Getter
 public class EventResponseDTO {
-    EventDetailDTO eventDetailDTO;
+    EventDetailDTO event;
 
     public EventResponseDTO(Event event, Integer numberOfAttendees) {
-        this.eventDetailDTO = new EventDetailDTO(
+        this.event = new EventDetailDTO(
                 event.getId(),
                 event.getTitle(),
                 event.getDetails(),
