@@ -46,39 +46,39 @@ Nessa aplicação vamos utilizar banco de dados relacional (SQL). Para ambiente 
 
 ```sql
 -- CreateTable
-CREATE TABLE "events" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "title" TEXT NOT NULL,
-    "details" TEXT,
-    "slug" TEXT NOT NULL,
-    "maximum_attendees" INTEGER
+CREATE TABLE events (
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    details VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL,
+    maximum_attendees INTEGER NOT NULL
 );
 
 -- CreateTable
-CREATE TABLE "attendees" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "event_id" TEXT NOT NULL,
-    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "attendees_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "events" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+CREATE TABLE attendees (
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    event_id VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT attendees_event_id_fkey FOREIGN KEY (event_id) REFERENCES events (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
-CREATE TABLE "check_ins" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "attendeeId" INTEGER NOT NULL,
-    CONSTRAINT "check_ins_attendeeId_fkey" FOREIGN KEY ("attendeeId") REFERENCES "attendees" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+CREATE TABLE check_ins(
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    attendee_id VARCHAR(255) NOT NULL,
+    CONSTRAINT check_ins_attendee_id_fkey FOREIGN KEY (attendee_id) REFERENCES attendees (id) ON  DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "events_slug_key" ON "events"("slug");
+CREATE UNIQUE INDEX events_slug_key ON events(slug);
 
 -- CreateIndex
-CREATE UNIQUE INDEX "attendees_event_id_email_key" ON "attendees"("event_id", "email");
+CREATE UNIQUE INDEX attendees_event_id_email_key ON attendees(event_id, email);
 
 -- CreateIndex
-CREATE UNIQUE INDEX "check_ins_attendeeId_key" ON "check_ins"("attendeeId");
+CREATE UNIQUE INDEX check_ins_attendee_id_key ON check_ins(attendee_id);
 ```
 
