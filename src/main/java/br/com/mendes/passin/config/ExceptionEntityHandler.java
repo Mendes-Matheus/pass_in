@@ -1,6 +1,7 @@
 package br.com.mendes.passin.config;
 
 
+import br.com.mendes.passin.domain.attendee.exceptions.AttendeeAlreadyRegisteredException;
 import br.com.mendes.passin.domain.event.exceptions.EventNotFoundException;
 import br.com.mendes.passin.dto.general.ErrorResponseDTO;
 import org.springframework.http.HttpStatus;
@@ -14,5 +15,10 @@ public class ExceptionEntityHandler {
     @ExceptionHandler(EventNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleEventNotFound(EventNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDTO(exception.getMessage()));
+    }
+
+    @ExceptionHandler(AttendeeAlreadyRegisteredException.class)
+    public ResponseEntity<ErrorResponseDTO> handleAttendeeAlreadyRegistered(AttendeeAlreadyRegisteredException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDTO(exception.getMessage()));
     }
 }

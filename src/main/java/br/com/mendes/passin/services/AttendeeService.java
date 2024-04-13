@@ -4,7 +4,6 @@ import br.com.mendes.passin.domain.attendee.Attendee;
 import br.com.mendes.passin.domain.attendee.exceptions.AttendeeAlreadyRegisteredException;
 import br.com.mendes.passin.domain.checkin.CheckIn;
 import br.com.mendes.passin.dto.attendee.AttendeeDetailDTO;
-import br.com.mendes.passin.dto.attendee.AttendeeIdDTO;
 import br.com.mendes.passin.dto.attendee.AttendeesListResponseDTO;
 import br.com.mendes.passin.repositories.AttendeeRepository;
 import lombok.RequiredArgsConstructor;
