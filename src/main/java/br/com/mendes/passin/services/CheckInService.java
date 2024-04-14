@@ -3,6 +3,7 @@ package br.com.mendes.passin.services;
 
 import br.com.mendes.passin.domain.attendee.Attendee;
 import br.com.mendes.passin.domain.checkin.CheckIn;
+import br.com.mendes.passin.domain.checkin.CheckInAlreadyExistsException;
 import br.com.mendes.passin.repositories.CheckInRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,6 @@ public class CheckInService {
     public void verifyCheckInExists(String attendeeId){
         Optional<CheckIn> checkIn = this.getCheckIn(attendeeId);
 
-        if(checkIn.isPresent()) throw new RuntimeException("CheckIn already exists!");
+        if(checkIn.isPresent()) throw new CheckInAlreadyExistsException("CheckIn already exists!");
     }
 }

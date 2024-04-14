@@ -3,6 +3,7 @@ package br.com.mendes.passin.config;
 
 import br.com.mendes.passin.domain.attendee.exceptions.AttendeeAlreadyRegisteredException;
 import br.com.mendes.passin.domain.attendee.exceptions.AttendeeNotFoundException;
+import br.com.mendes.passin.domain.checkin.CheckInAlreadyExistsException;
 import br.com.mendes.passin.domain.event.exceptions.EventFullException;
 import br.com.mendes.passin.domain.event.exceptions.EventNotFoundException;
 import br.com.mendes.passin.dto.general.ErrorResponseDTO;
@@ -32,6 +33,11 @@ public class ExceptionEntityHandler {
     @ExceptionHandler(AttendeeNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleAttendeeNotFound(AttendeeNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDTO(exception.getMessage()));
+    }
+
+    @ExceptionHandler(CheckInAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseDTO> handleCheckInAlreadyExists(CheckInAlreadyExistsException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDTO(exception.getMessage()));
     }
 
 }
