@@ -14,9 +14,9 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 **Observação.:** Inicialmente, a aplicação utilizava o banco de dados HyperSQL, posteriormente, mudei o banco de dados para o PostgreSQL
 
 
-# Requisitos
+## Requisitos
 
-## Requisitos Funcionais
+### Requisitos Funcionais
 - O organizador deve poder cadastrar um novo evento;
 - O organizador deve poder visualizar dados de um evento;
 - O organizador deve poser visualizar a lista de participantes;
@@ -24,23 +24,23 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 - O participante deve poder visualizar seu crachá de inscrição;
 - O participante deve poder realizar check-in no evento;
 
-## Regras de Negócio
+### Regras de Negócio
 - O participante só pode se inscrever em um evento uma única vez;
 - O participante só pode se inscrever em eventos com vagas disponíveis;
 - O participante só pode realizar check-in em um evento uma única vez;
 
-## Requisitos Não Funcionais
+### Requisitos Não Funcionais
 - O check-in no evento será realizado através de um QRCode;
 
 ## Documentação da API (Swagger)
 Para documentação da API, acesse o link: https://nlw-unite-nodejs.onrender.com/docs
 
-## Banco de dados
-Nessa aplicação vamos utilizar banco de dados relacional (SQL). Para ambiente de desenvolvimento seguiremos com o PostgreSQL.
-
-### Diagrama ERD
+## Diagrama ERD
 
 <img src="https://github.com/rocketseat-education/nlw-unite-nodejs/blob/main/.github/erd.svg" width="200" alt="Diagrama ERD do banco de dados" />
+
+## Banco de dados
+Nessa aplicação vamos utilizar banco de dados relacional (SQL). Para ambiente de desenvolvimento seguiremos com o PostgreSQL.
 
 ### Estrutura do banco (SQL)
 
