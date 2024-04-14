@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AttendeeRepository extends JpaRepository<Attendee, String> {
-    List<Attendee> findByEventId(String eventId);
+    List<Attendee> findByEventIdOrderByCreatedAt(String eventId);
 
     Optional<Attendee> findByEventIdAndEmail(String eventId, String email);
 }

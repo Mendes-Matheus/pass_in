@@ -24,7 +24,7 @@ public class AttendeeService {
     private final CheckInService checkInService;
 
     public List<Attendee> getAllAttendeesFromEvent(String eventId){
-        return this.attendeeRepository.findByEventId(eventId);
+        return this.attendeeRepository.findByEventIdOrderByCreatedAt(eventId);
     }
 
     public void verifyAttendeeSubscription(String eventId, String email){
@@ -32,8 +32,8 @@ public class AttendeeService {
         if(isAttendeeRegistered.isPresent()) throw new AttendeeAlreadyRegisteredException("Attendee is already registered!");
     }
 
-    public Attendee registerAttendee(Attendee newAttendee){
-        return this.attendeeRepository.save(newAttendee);
+    public void registerAttendee(Attendee newAttendee){
+        this.attendeeRepository.save(newAttendee);
     }
 
     public AttendeesListResponseDTO getEventsAttendee(String eventId){
