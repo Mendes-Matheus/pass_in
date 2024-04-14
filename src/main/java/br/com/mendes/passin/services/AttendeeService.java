@@ -61,4 +61,9 @@ public class AttendeeService {
 
         return new AttendeeBadgeResponseDTO(attendeeBadgeDTO);
     }
+
+    public void checkInAttendee(String attendeeId){
+        Attendee attendee = this.getAttendee(attendeeId);
+        this.checkInService.registerCheckIn(attendee);
+    }
 }
